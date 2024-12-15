@@ -1,0 +1,16 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="v1-3" author="Dmitry Durasov">
+        <addUniqueConstraint tableName="users" columnNames="email" constraintName="uc_users_email"/>
+        <addNotNullConstraint tableName="users" columnName="email"  columnDataType="varchar(50)"/>
+        <addNotNullConstraint tableName="users" columnName="password" columnDataType="varchar(50)"/>
+        <sql>
+            ALTER TABLE users
+                ADD CONSTRAINT chk_users_role
+                    CHECK (role IN ('USER', 'ADMIN'));
+        </sql>
+    </changeSet>
+</databaseChangeLog>
